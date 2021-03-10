@@ -1,5 +1,6 @@
 - if AdditionalTags.setting?(:active_issue_tags) && \
-     User.current.allowed_to?(:view_issue_tags, @project, global: true) && sidebar_tags.present?
+     User.current.allowed_to?(:view_issue_tags, @project, global: true) && sidebar_toggle_path.present?
   .sidebar-tags
     h3 = l :field_tags
-    = render_sidebar_tags
+    = render_sidebar_queries(IssueQuery, @project)
+    = call_hook(:view_issues_sidebar_queries_bottom) 
